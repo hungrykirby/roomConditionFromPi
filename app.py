@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from fetchDataModules import humidityAndTemperature
 from fetchDataModules import co2
 from sendData import firebase

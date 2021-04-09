@@ -6,19 +6,15 @@ import time
 
 import os
 from os.path import join, dirname
-from dotenv import load_dotenv
 
-load_dotenv(verbose=True)
-dotenv_path = join(dirname(__file__), '.env')
-load_dotenv(dotenv_path)
+import settings
 
 class FirebaseSender:
     def __init__(self):
-        json_file_path = join(os.getcwd(), 'config', os.environ.get("FIREBASEJSONFIRENAME"))
-        database_url = os.environ.get("FIREBASEADMINURL")
+        json_file_path = join(os.getcwd(), 'config', settings.FIREBASE_FIRENAME)
         cred = credentials.Certificate(json_file_path)
         firebase_admin.initialize_app(cred, {
-            'databaseURL': database_url,
+            'databaseURL': settings.FIREBASE_ADMINURL,
             'databaseAuthVariableOverride': {
                 'uid': 'my-service-worker'
             }
