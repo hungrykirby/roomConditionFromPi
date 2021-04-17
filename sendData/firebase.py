@@ -11,7 +11,8 @@ import settings
 
 class FirebaseSender:
     def __init__(self):
-        json_file_path = join(os.getcwd(), 'config', settings.FIREBASE_FIRENAME)
+        root_path = settings.ROOT_PATH
+        json_file_path = join(root_path, 'config', settings.FIREBASE_FIRENAME)
         cred = credentials.Certificate(json_file_path)
         firebase_admin.initialize_app(cred, {
             'databaseURL': settings.FIREBASE_ADMINURL,
@@ -39,4 +40,4 @@ class FirebaseSender:
         environment_ref.push(ref)
 
         ##データを取得する
-        print(environment_ref.get())
+        # print(environment_ref.get())

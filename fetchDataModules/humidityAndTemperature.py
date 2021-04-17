@@ -1,5 +1,3 @@
-#!/usr/bin/python
-
 import Adafruit_DHT
 
 import urllib.request
@@ -14,6 +12,9 @@ class AdafruitHumidityTemperatureFetcher:
         pass
 
     def fetchData(self):
-        humidity, temperature = Adafruit_DHT.read_retry(self.SENSOR, self.PIN)
-        return {'humidity': humidity, 'temperature': temperature}
+        try:
+            humidity, temperature = Adafruit_DHT.read_retry(self.SENSOR, self.PIN)
+            return True, {'humidity': humidity, 'temperature': temperature}
+        except:
+            return False, 'Adafruit DHT error'
 
