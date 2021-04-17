@@ -6,11 +6,13 @@ from sendData import firebase
 
 def main():
     result_ht, ht = humidityAndTemperature.AdafruitHumidityTemperatureFetcher().fetchData()
-    humidity = ht['humidity']
-    temperature = ht['temperature']
 
     result_co2, value = co2.MHZ19CO2Fetcher().fetchData()
-    if result_ht and result_co2 and int(temperature) < 50 and int(humidity) < 100:
+    
+    # 湿度、温度、二酸化炭素濃度がいずれかただしく取得できなかったら送信しない
+    if result_ht and result_co2:
+        humidity = ht['humidity']
+        temperature = ht['temperature']
         sender = firebase.FirebaseSender()
         sender.send(temperature, humidity, value)
     else:
