@@ -6,6 +6,10 @@ class MHZ19CO2Fetcher:
         pass
 
     def fetchData(self):
+        # return Bool, str or int
+        # Bool: 実行結果。Falseはなんらかのエラーまたは不正な値が来た
+        # str or int: BoolがFalseのときにはエラー内容の文字列が返る
+        # Trueのときには二酸化炭素濃度の数値が返る
         try:
             out = subprocess.check_output(['sudo', 'python', '-m', 'mh_z19'])
             if not out:
